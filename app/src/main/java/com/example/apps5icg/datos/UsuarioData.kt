@@ -30,7 +30,15 @@ val usuarios = mutableListOf(
         correo = "ig.cortez@duocuc.cl",
         telefono = "99999999",
         contrasenha = "dosgatosnegros"
+    ),
+    Usuario(
+        nombre = "Andres",
+        rut = "33445566-7",
+        correo = "andres@gmail.com",
+        telefono = "22334455",
+        contrasenha = "andres123"
     )
+
 )
 
 const val MAX_USUARIOS = 5

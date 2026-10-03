@@ -64,7 +64,9 @@ fun PantallaHome(navController: NavHostController) {
                 // BOTÓN: Texto a voz
                 BotonPrimario(
                     text = "Texto a voz",
-                    onClick = { /* funcionalidad futura */ }
+                    onClick = {
+                        navController.navigate("tts")
+                    }
                 )
 
                 Spacer(Modifier.height(40.dp))

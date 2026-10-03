@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apps5icg.funciones.escribirymostrar.PantallaEscribir
 import com.example.apps5icg.funciones.escribirymostrar.PantallaMostrar
+import com.example.apps5icg.funciones.textoavoz.PantallaTextoAVoz
 import com.example.apps5icg.pantallas.home.PantallaHome
 import com.example.apps5icg.pantallas.login.PantallaLogin
 import com.example.apps5icg.pantallas.recuperar.PantallaRecuperar
@@ -46,6 +47,10 @@ fun AppNavegacion() {
         composable("mostrar?mensaje={mensaje}") { backStackEntry ->
             val mensaje = backStackEntry.arguments?.getString("mensaje") ?: ""
             PantallaMostrar(navController, mensaje)
+
+        }
+        composable("tts") {
+            PantallaTextoAVoz(navController)
         }
 
 

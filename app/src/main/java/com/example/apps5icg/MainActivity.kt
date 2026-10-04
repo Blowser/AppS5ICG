@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.apps5icg.funciones.escribirymostrar.PantallaEscribir
 import com.example.apps5icg.funciones.escribirymostrar.PantallaMostrar
 import com.example.apps5icg.funciones.textoavoz.PantallaTextoAVoz
+import com.example.apps5icg.funciones.transcribir.PantallaEscucharYTranscribir
 import com.example.apps5icg.pantallas.home.PantallaHome
 import com.example.apps5icg.pantallas.login.PantallaLogin
 import com.example.apps5icg.pantallas.recuperar.PantallaRecuperar
@@ -51,6 +52,9 @@ fun AppNavegacion() {
         }
         composable("tts") {
             PantallaTextoAVoz(navController)
+        }
+        composable("transcribir") {
+            PantallaEscucharYTranscribir(navController)
         }
 
 

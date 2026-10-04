@@ -61,7 +61,7 @@ fun PantallaEscucharYTranscribir(navController: NavHostController)  {
                 CampoTexto(
                     value = textoTranscrito,                 // valor actual del input
                     onValueChange = {}, //
-                    placeholder = "texto transcrito",
+                    placeholder = "aquí aparecerá el texto escuchado",
                     leadingIcon = { MicGlyph(color = ICGBlack) },
                     keyboardType = KeyboardType.Text
                 )

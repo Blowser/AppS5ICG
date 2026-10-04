@@ -35,6 +35,7 @@ import com.example.apps5icg.ui.theme.AppS5ICGTheme
 import com.example.apps5icg.ui.theme.ICGBlack
 import com.example.apps5icg.ui.theme.ICGPurple
 import com.example.apps5icg.ui.theme.ICGTurquoise
+import com.example.apps5icg.componentes.MicGlyph
 
 @Composable
 fun PantallaEscucharYTranscribir(navController: NavHostController)  {

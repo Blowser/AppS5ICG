@@ -31,6 +31,7 @@ import com.example.apps5icg.ui.theme.ICGTurquoise
 import android.speech.tts.TextToSpeech
 // Permite obtener el contexto actual de Android dentro de Compose
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
 // Permite configurar el idioma del motor de voz
 import java.util.Locale
 // Permite ejecutar limpieza cuando la pantalla se destruye
@@ -41,31 +42,42 @@ import androidx.compose.runtime.DisposableEffect
 @Composable
 fun PantallaTextoAVoz(navController: NavHostController) {
 // -----------------------------
-// ESTADOS
+// ESTADOS DE LA PANTALLA
 // -----------------------------
+// Guarda el texto ingresado por el usuario.
+// Cada vez que cambia, Compose actualiza la interfaz.
     var texto by remember { mutableStateOf("") }
 // -----------------------------
-// CONTEXTO
+// CONTEXTO DE ANDROID
 // -----------------------------
+// Contexto necesario para utilizar servicios nativos
+// de Android como TextToSpeech.
     val context = LocalContext.current
+// Indica si la pantalla se está ejecutando
+// dentro del Preview de Android Studio.
+    val isInPreview = LocalInspectionMode.current
 // -----------------------------
-// MOTOR TTS
+// MOTOR DE TEXTO A VOZ (TTS)
 // -----------------------------
+// Crea el motor que convertirá texto en audio.
+// En Preview no se inicializa para evitar errores.
     val tts = remember {
-        TextToSpeech(context, null)
+        if (!isInPreview) TextToSpeech(context, null) else null
     }
 // -----------------------------
 // CONFIGURACIÓN DEL TTS
 // -----------------------------
+// Configura el idioma español y libera recursos
+// cuando se abandona la pantalla.
     DisposableEffect(Unit) {
-        tts.language = Locale.forLanguageTag("es-ES")
+        tts?.language = Locale.forLanguageTag("es-ES")
         onDispose {
-            tts.stop()
-            tts.shutdown()
+            tts?.stop()
+            tts?.shutdown()
         }
     }
 // -----------------------------
-// UI DE LA PANTALLA
+// INTERFAZ DE LA PANTALLA
 // -----------------------------
 
     FondoDePantalla {
@@ -104,7 +116,7 @@ fun PantallaTextoAVoz(navController: NavHostController) {
 // Evita reproducir si el campo está vacío
                         if (texto.isNotBlank()) {
 // Convierte el texto escrito en voz
-                            tts.speak(
+                            tts?.speak(
                                 texto, // texto a reproducir
                                 TextToSpeech.QUEUE_FLUSH, // limpia reproducciones anteriores
                                 null, // parámetros extra

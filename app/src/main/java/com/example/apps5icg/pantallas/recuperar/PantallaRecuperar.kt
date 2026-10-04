@@ -1,8 +1,14 @@
 package com.example.apps5icg.pantallas.recuperar
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Alignment
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -51,13 +57,19 @@ fun PantallaRecuperar(navController: NavHostController) {
 
     // FONDO DE PANTALLA (gradiente + padding)
     FondoDePantalla {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            // CARD PRINCIPAL
+            CardApp {
 
-        // CARD PRINCIPAL
-        CardApp {
+                // CONTENIDO DEL CARD
 
-            // CONTENIDO DEL CARD
-
-            CardContenidoApp {
+                CardContenidoApp {
 
                 // Ícono superior
                 AvatarApp(backgroundColor = ICGTurquoise, iconColor = Color.White)
@@ -126,6 +138,7 @@ fun PantallaRecuperar(navController: NavHostController) {
             }
         }
     }
+}
 }
 
 

@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Badge
 import androidx.compose.material.icons.filled.ConnectWithoutContact
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Visibility
@@ -85,6 +86,21 @@ fun IdGlyph(
 ) {
     Icon(
         imageVector = Icons.Default.Badge,
+        contentDescription = null,
+        tint = color,
+        modifier = modifier.size(size)
+
+    )
+}
+
+@Composable
+fun MicGlyph(
+    color: Color,
+    modifier: Modifier = Modifier,
+    size: Dp = 20.dp
+) {
+    Icon(
+        imageVector = Icons.Default.Mic,
         contentDescription = null,
         tint = color,
         modifier = modifier.size(size)

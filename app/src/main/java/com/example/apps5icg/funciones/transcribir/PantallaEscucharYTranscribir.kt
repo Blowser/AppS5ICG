@@ -29,12 +29,17 @@ import com.example.apps5icg.ui.theme.ICGPurple
 import com.example.apps5icg.ui.theme.ICGTurquoise
 import com.example.apps5icg.componentes.MicGlyph
 
+// Permite comprobar si Android devolvió un resultado correcto.
 import android.app.Activity
+// Permite crear Intents para comunicarse con servicios Android.
 import android.content.Intent
+// Proporciona el reconocimiento de voz nativo de Android.
 import android.speech.RecognizerIntent
-
+// Permite lanzar actividades y recibir resultados en Compose.
 import androidx.activity.compose.rememberLauncherForActivityResult
+// Contrato utilizado para recibir el resultado del reconocedor.
 import androidx.activity.result.contract.ActivityResultContracts
+// Detecta si la pantalla está en Preview o en ejecución real.
 import androidx.compose.ui.platform.LocalInspectionMode
 
 

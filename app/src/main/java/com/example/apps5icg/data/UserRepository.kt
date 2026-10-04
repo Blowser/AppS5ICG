@@ -4,12 +4,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 object UserRepository {
 
-    // Conexión con Firestore
+    // Conexión con Firestore (obtener la instancia)
     private val db = FirebaseFirestore.getInstance()
 
     // Colección donde se guardarán los usuarios
     private const val USERS_COLLECTION = "usuarios"
 
+    //crear funciones del CRUD BD
     fun registerUser(
         nombre: String,
         rut: String,

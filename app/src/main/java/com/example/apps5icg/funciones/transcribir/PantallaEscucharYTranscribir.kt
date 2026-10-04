@@ -73,8 +73,7 @@ fun PantallaEscucharYTranscribir(navController: NavHostController)  {
                 // Botón mostrar
                 BotonPrimario(
                     text = "Escuchar",
-                    onClick = {
-                    }
+                    onClick = {}
                 )
                 BotonPrimario(
                     text = "Volver al Home",

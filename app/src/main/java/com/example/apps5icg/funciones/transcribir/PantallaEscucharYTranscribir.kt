@@ -63,7 +63,7 @@ fun PantallaEscucharYTranscribir(navController: NavHostController)  {
                     onValueChange = {}, //
                     placeholder = "texto transcrito",
                     leadingIcon = { MicGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Email
+                    keyboardType = KeyboardType.Text
                 )
 
 

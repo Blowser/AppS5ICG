@@ -56,7 +56,7 @@ fun PantallaHome(navController: NavHostController) {
                 // BOTÓN: Escuchar y transcribir
                 BotonPrimario(
                     text = "Escuchar y transcribir",
-                    onClick = { /* funcionalidad futura */ }
+                    onClick = { navController.navigate("transcribir")}
                 )
 
                 Spacer(Modifier.height(30.dp))

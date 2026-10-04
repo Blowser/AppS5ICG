@@ -52,7 +52,8 @@ fun PantallaEscucharYTranscribir(
     // ESTADOS DE LA PANTALLA
     // -----------------------------
 
-    // Guarda el texto reconocido por el micrófono.
+// Guarda el texto detectado por el micrófono.
+// Cuando cambia, la interfaz se actualiza automáticamente.
     var textoTranscrito by remember {
         mutableStateOf("")
     }
@@ -65,7 +66,9 @@ fun PantallaEscucharYTranscribir(
 // -----------------------------
 // RECONOCEDOR DE VOZ
 // -----------------------------
-
+// Gestiona el resultado del reconocimiento de voz.
+// Cuando Android devuelve el texto escuchado,
+// este se almacena en textoTranscrito.
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -80,9 +83,9 @@ fun PantallaEscucharYTranscribir(
             textoTranscrito = datos?.firstOrNull() ?: ""
         }
     }
-
+// Configura el reconocedor de voz de Android.
     val intentReconocimiento = remember {
-
+// Permite reconocer lenguaje natural.
         Intent(
             RecognizerIntent.ACTION_RECOGNIZE_SPEECH
         ).apply {
@@ -91,12 +94,12 @@ fun PantallaEscucharYTranscribir(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-
+// Fuerza el reconocimiento en español.
             putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE,
                 "es-CL"
             )
-
+// Mensaje mostrado al iniciar la escucha.
             putExtra(
                 RecognizerIntent.EXTRA_PROMPT,
                 "Habla ahora..."

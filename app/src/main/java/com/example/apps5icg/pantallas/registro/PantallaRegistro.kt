@@ -31,12 +31,10 @@ import com.example.apps5icg.ui.theme.AppS5ICGTheme
 import com.example.apps5icg.ui.theme.ICGBlack
 import com.example.apps5icg.ui.theme.ICGPurple
 import com.example.apps5icg.ui.theme.ICGTurquoise
-import com.example.apps5icg.datos.usuarios
-import com.example.apps5icg.datos.MAX_USUARIOS
+
 import com.example.apps5icg.componentes.MensajeInformacion
 import com.example.apps5icg.componentes.UserGlyph
-import com.example.apps5icg.modelo.Usuario
-
+import com.example.apps5icg.data.UserRepository
 @Composable
 fun PantallaRegistro(navController: NavHostController) {
 
@@ -186,49 +184,56 @@ fun PantallaRegistro(navController: NavHostController) {
                     text = "Crear cuenta",
                     onClick = {
 
-                        // VALIDACIONES
-                        mensaje = when {
+                        when {
 
-                            // Campos vacíos
-                            nombre.isEmpty() || rut.isEmpty() || correo.isEmpty() ||
-                                    telefono.isEmpty() || contrasenha.isEmpty() ||
-                                    confirmarContrasenha.isEmpty() ->
-                                "Todos los campos son obligatorios"
+                            nombre.isEmpty() ||
+                                    rut.isEmpty() ||
+                                    correo.isEmpty() ||
+                                    telefono.isEmpty() ||
+                                    contrasenha.isEmpty() ||
+                                    confirmarContrasenha.isEmpty() -> {
 
-                            // Correo inválido
-                            !correo.contains("@") ->
-                                "Correo electrónico no válido"
-
-                            // Contraseña muy corta
-                            contrasenha.length < 8 ->
-                                "La contraseña debe tener al menos 8 caracteres"
-
-                            // Contraseñas no coinciden
-                            contrasenha != confirmarContrasenha ->
-                                "Las contraseñas no coinciden"
-
-                            // Máximo de usuarios
-                            usuarios.size >= MAX_USUARIOS ->
-                                "Se alcanzó el máximo de usuarios permitidos"
-
-                            // Registro exitoso
-                            else -> {
-                                usuarios.add(
-                                    Usuario(
-                                        nombre = nombre,
-                                        rut = rut,
-                                        correo = correo,
-                                        telefono = telefono,
-                                        contrasenha = contrasenha
-                                    )
-                                )
-                                "Usuario registrado exitosamente"
+                                mensaje = "Todos los campos son obligatorios"
                             }
-                        }
 
-                        // Si el registro fue exitoso → volver al login
-                        if (mensaje == "Usuario registrado exitosamente") {
-                            navController.navigate("login")
+                            !correo.contains("@") -> {
+
+                                mensaje = "Correo electrónico no válido"
+                            }
+
+                            contrasenha.length < 8 -> {
+
+                                mensaje = "La contraseña debe tener al menos 8 caracteres"
+                            }
+
+                            contrasenha != confirmarContrasenha -> {
+
+                                mensaje = "Las contraseñas no coinciden"
+                            }
+
+                            else -> {
+
+                                UserRepository.registerUser(
+                                    nombre = nombre,
+                                    rut = rut,
+                                    correo = correo,
+                                    telefono = telefono,
+                                    contrasenha = contrasenha,
+
+                                    onSuccess = {
+
+                                        mensaje =
+                                            "Usuario registrado exitosamente"
+
+                                        navController.navigate("login")
+                                    },
+
+                                    onError = {
+
+                                        mensaje = it
+                                    }
+                                )
+                            }
                         }
                     }
                 )

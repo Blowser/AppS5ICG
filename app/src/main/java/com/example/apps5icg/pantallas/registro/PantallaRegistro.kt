@@ -1,12 +1,18 @@
 package com.example.apps5icg.pantallas.registro
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
@@ -57,197 +63,206 @@ fun PantallaRegistro(navController: NavHostController) {
     // FONDO DE PANTALLA
     // -----------------------------
     FondoDePantalla {
-
         // -----------------------------
-        // CARD PRINCIPAL
-        // -----------------------------
-        CardApp {
+        //FIX DE SCROLL PARA CELULARES O PANTALLAS PEQUEÑAS
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
             // -----------------------------
-            // CONTENIDO DEL CARD
+            // CARD PRINCIPAL
             // -----------------------------
-            CardContenidoApp {
-
-                // Avatar superior
-                AvatarApp(backgroundColor = ICGTurquoise, iconColor = Color.White)
-
-                // Título de la app
-                TituloApp(color = ICGPurple)
-
-                // Encabezado de la pantalla
-                EncabezadoApp(
-                    titulo = "BIENVENIDO",
-                    subtitulo = "Regístrate en nuestra App"
-                )
-
+            CardApp {
 
                 // -----------------------------
-                // INPUT: Nombre
-
-                EtiquetaCampo(text = "Nombre")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = nombre,
-                    onValueChange = { nombre = it },
-                    placeholder = "Tu nombre completo",
-                    leadingIcon = { UserGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Text
-                )
-
-                Spacer(Modifier.height(20.dp))
-
-
+                // CONTENIDO DEL CARD
                 // -----------------------------
-                // INPUT: Rut
+                CardContenidoApp {
 
-                EtiquetaCampo(text = "RUT")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = rut,
-                    onValueChange = { rut = it },
-                    placeholder = "12345678-9",
-                    leadingIcon = { IdGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Text
-                )
+                    // Avatar superior
+                    AvatarApp(backgroundColor = ICGTurquoise, iconColor = Color.White)
 
-                Spacer(Modifier.height(20.dp))
+                    // Título de la app
+                    TituloApp(color = ICGPurple)
 
-
-                // -----------------------------
-                // INPUT: Correo
-
-                EtiquetaCampo(text = "Correo electrónico")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = correo,
-                    onValueChange = { correo = it },
-                    placeholder = "ejemplo@correo.com",
-                    leadingIcon = { EmailGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Email
-                )
-
-                Spacer(Modifier.height(20.dp))
+                    // Encabezado de la pantalla
+                    EncabezadoApp(
+                        titulo = "BIENVENIDO",
+                        subtitulo = "Regístrate en nuestra App"
+                    )
 
 
-                // -----------------------------
-                // INPUT: Teléfono
+                    // -----------------------------
+                    // INPUT: Nombre
 
-                EtiquetaCampo(text = "Teléfono")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = telefono,
-                    onValueChange = { telefono = it },
-                    placeholder = "987654321",
-                    leadingIcon = { PhoneGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Phone
-                )
+                    EtiquetaCampo(text = "Nombre")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = nombre,
+                        onValueChange = { nombre = it },
+                        placeholder = "Tu nombre completo",
+                        leadingIcon = { UserGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Text
+                    )
 
-                Spacer(Modifier.height(20.dp))
-
-
-                // -----------------------------
-                // INPUT: Contraseña
-
-                EtiquetaCampo(text = "Crear contraseña")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = contrasenha,
-                    onValueChange = { contrasenha = it },
-                    placeholder = "Crear contraseña",
-                    leadingIcon = { LockGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Password
-                )
-
-                Spacer(Modifier.height(20.dp))
+                    Spacer(Modifier.height(20.dp))
 
 
-                // -----------------------------
-                // INPUT: Confirmar contraseña
+                    // -----------------------------
+                    // INPUT: Rut
 
-                EtiquetaCampo(text = "Confirmar contraseña")
-                Spacer(Modifier.height(10.dp))
-                CampoTexto(
-                    value = confirmarContrasenha,
-                    onValueChange = { confirmarContrasenha = it },
-                    placeholder = "Confirmar contraseña",
-                    leadingIcon = { LockGlyph(color = ICGBlack) },
-                    keyboardType = KeyboardType.Password
-                )
+                    EtiquetaCampo(text = "RUT")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = rut,
+                        onValueChange = { rut = it },
+                        placeholder = "12345678-9",
+                        leadingIcon = { IdGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Text
+                    )
 
-                Spacer(Modifier.height(30.dp))
+                    Spacer(Modifier.height(20.dp))
 
 
-                // -----------------------------
-                // BOTÓN: Registrar usuario
+                    // -----------------------------
+                    // INPUT: Correo
 
-                BotonPrimario(
-                    text = "Crear cuenta",
-                    onClick = {
+                    EtiquetaCampo(text = "Correo electrónico")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = correo,
+                        onValueChange = { correo = it },
+                        placeholder = "ejemplo@correo.com",
+                        leadingIcon = { EmailGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Email
+                    )
 
-                        when {
+                    Spacer(Modifier.height(20.dp))
 
-                            nombre.isEmpty() ||
-                                    rut.isEmpty() ||
-                                    correo.isEmpty() ||
-                                    telefono.isEmpty() ||
-                                    contrasenha.isEmpty() ||
-                                    confirmarContrasenha.isEmpty() -> {
 
-                                mensaje = "Todos los campos son obligatorios"
-                            }
+                    // -----------------------------
+                    // INPUT: Teléfono
 
-                            !correo.contains("@") -> {
+                    EtiquetaCampo(text = "Teléfono")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = telefono,
+                        onValueChange = { telefono = it },
+                        placeholder = "987654321",
+                        leadingIcon = { PhoneGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Phone
+                    )
 
-                                mensaje = "Correo electrónico no válido"
-                            }
+                    Spacer(Modifier.height(20.dp))
 
-                            contrasenha.length < 8 -> {
 
-                                mensaje = "La contraseña debe tener al menos 8 caracteres"
-                            }
+                    // -----------------------------
+                    // INPUT: Contraseña
 
-                            contrasenha != confirmarContrasenha -> {
+                    EtiquetaCampo(text = "Crear contraseña")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = contrasenha,
+                        onValueChange = { contrasenha = it },
+                        placeholder = "Crear contraseña",
+                        leadingIcon = { LockGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Password
+                    )
 
-                                mensaje = "Las contraseñas no coinciden"
-                            }
+                    Spacer(Modifier.height(20.dp))
 
-                            else -> {
 
-                                UserRepository.registerUser(
-                                    nombre = nombre,
-                                    rut = rut,
-                                    correo = correo,
-                                    telefono = telefono,
-                                    contrasenha = contrasenha,
+                    // -----------------------------
+                    // INPUT: Confirmar contraseña
 
-                                    onSuccess = {
+                    EtiquetaCampo(text = "Confirmar contraseña")
+                    Spacer(Modifier.height(10.dp))
+                    CampoTexto(
+                        value = confirmarContrasenha,
+                        onValueChange = { confirmarContrasenha = it },
+                        placeholder = "Confirmar contraseña",
+                        leadingIcon = { LockGlyph(color = ICGBlack) },
+                        keyboardType = KeyboardType.Password
+                    )
 
-                                        mensaje =
-                                            "Usuario registrado exitosamente"
+                    Spacer(Modifier.height(30.dp))
 
-                                        navController.navigate("login")
-                                    },
 
-                                    onError = {
+                    // -----------------------------
+                    // BOTÓN: Registrar usuario
 
-                                        mensaje = it
-                                    }
-                                )
+                    BotonPrimario(
+                        text = "Crear cuenta",
+                        onClick = {
+
+                            when {
+
+                                nombre.isEmpty() ||
+                                        rut.isEmpty() ||
+                                        correo.isEmpty() ||
+                                        telefono.isEmpty() ||
+                                        contrasenha.isEmpty() ||
+                                        confirmarContrasenha.isEmpty() -> {
+
+                                    mensaje = "Todos los campos son obligatorios"
+                                }
+
+                                !correo.contains("@") -> {
+
+                                    mensaje = "Correo electrónico no válido"
+                                }
+
+                                contrasenha.length < 8 -> {
+
+                                    mensaje = "La contraseña debe tener al menos 8 caracteres"
+                                }
+
+                                contrasenha != confirmarContrasenha -> {
+
+                                    mensaje = "Las contraseñas no coinciden"
+                                }
+
+                                else -> {
+
+                                    UserRepository.registerUser(
+                                        nombre = nombre,
+                                        rut = rut,
+                                        correo = correo,
+                                        telefono = telefono,
+                                        contrasenha = contrasenha,
+
+                                        onSuccess = {
+
+                                            mensaje =
+                                                "Usuario registrado exitosamente"
+
+                                            navController.navigate("login")
+                                        },
+
+                                        onError = {
+
+                                            mensaje = it
+                                        }
+                                    )
+                                }
                             }
                         }
-                    }
-                )
+                    )
 
 
-                // -----------------------------
-                // MENSAJE DE ERROR / ÉXITO
+                    // -----------------------------
+                    // MENSAJE DE ERROR / ÉXITO
 
-                MensajeInformacion(texto = mensaje)
+                    MensajeInformacion(texto = mensaje)
+                }
             }
         }
     }
 }
-
 
 
 

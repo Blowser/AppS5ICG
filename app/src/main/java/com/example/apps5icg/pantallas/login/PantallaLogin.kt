@@ -38,7 +38,7 @@ import com.example.apps5icg.componentes.FondoDePantalla
 import com.example.apps5icg.componentes.LockGlyph
 import com.example.apps5icg.componentes.MensajeInformacion
 import com.example.apps5icg.componentes.TituloApp
-import com.example.apps5icg.datos.usuarios
+import com.example.apps5icg.data.UserRepository
 import com.example.apps5icg.ui.theme.AppS5ICGTheme
 import com.example.apps5icg.ui.theme.ICGBlack
 import com.example.apps5icg.ui.theme.ICGPurple
@@ -168,19 +168,22 @@ fun PantallaLogin(navController: NavHostController) {
                     onClick = {
 
                         // Busca un usuario en la lista que coincida con correo + contraseña
-                        val encontrado = usuarios.find {
-                            it.correo == correo && it.contrasenha == contrasenha
-                        }
+                        UserRepository.loginUser(
+                            correo = correo,
+                            contrasenha = contrasenha,
 
-                        // Si existe → login exitoso
-                        if (encontrado != null) {
-                            mensaje = "Inicio de sesión exitoso"
-                            navController.navigate("home")
+                            onSuccess = {
 
-                            // Si no existe → credenciales incorrectas
-                        } else {
-                            mensaje = "Credenciales incorrectas"
-                        }
+                                mensaje = "Inicio de sesión exitoso"
+
+                                navController.navigate("home")
+                            },
+
+                            onError = {
+
+                                mensaje = it
+                            }
+                        )
                     }
                 )
 

@@ -35,7 +35,7 @@ import com.example.apps5icg.componentes.EtiquetaCampo
 import com.example.apps5icg.componentes.FondoDePantalla
 import com.example.apps5icg.componentes.MensajeInformacion
 import com.example.apps5icg.componentes.TituloApp
-import com.example.apps5icg.datos.usuarios
+import com.example.apps5icg.data.UserRepository
 
 import com.example.apps5icg.ui.theme.AppS5ICGTheme
 import com.example.apps5icg.ui.theme.ICGBlack
@@ -100,21 +100,34 @@ fun PantallaRecuperar(navController: NavHostController) {
 
 
                 // BOTÓN: Buscar usuario
-                BotonPrimario(
-                    text = "Confirmar",
-                    onClick = {
+                    BotonPrimario(
+                        text = "Confirmar",
+                        onClick = {
 
-                        // Busca un usuario con ese correo
-                        val encontrado = usuarios.find { it.correo == correo }
+                            if (correo.isBlank()) {
 
-                        // Si existe → mensaje de éxito
-                        mensaje = if (encontrado != null) {
-                            "Se envió un correo para recuperar su contraseña"
-                        } else {
-                            "No se encontró un usuario con el correo proporcionado"
+                                mensaje = "Debe ingresar un correo electrónico"
+
+                            } else {
+
+                                UserRepository.recoverPassword(
+
+                                    correo = correo,
+
+                                    onSuccess = {
+
+                                        mensaje =
+                                            "Correo encontrado. Solicitud de recuperación enviada."
+                                    },
+
+                                    onError = {
+
+                                        mensaje = it
+                                    }
+                                )
+                            }
                         }
-                    }
-                )
+                    )
 
 
                 Spacer(Modifier.height(10.dp))

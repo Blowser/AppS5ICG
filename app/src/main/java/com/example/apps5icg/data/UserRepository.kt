@@ -97,4 +97,33 @@ object UserRepository {
                 )
             }
     }
+
+    fun recoverPassword(
+        correo: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+
+        db.collection(USERS_COLLECTION)
+            .whereEqualTo("correo", correo)
+            .get()
+            .addOnSuccessListener { result ->
+
+                if (result.isEmpty) {
+
+                    onError("No se encontró un usuario con ese correo")
+
+                } else {
+
+                    onSuccess()
+                }
+            }
+            .addOnFailureListener { e ->
+
+                onError(
+                    e.message ?: "Error al conectarse al servidor"
+                )
+
+            }
+    }
 }
